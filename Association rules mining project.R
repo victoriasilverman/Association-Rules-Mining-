@@ -1,6 +1,6 @@
 ## Victoria Silverman
 ##University of Ottawa 
-##This is an assignment please do not copy##
+##This is the property of Victoria Silverman and the University of Ottawa and Carleton University
 
 ##set up directory 
 wd2='/Users/Victoria/Documents/Victoria/4th year/STAT4601'
