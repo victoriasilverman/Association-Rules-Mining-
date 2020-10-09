@@ -1,5 +1,6 @@
-## Victoria Silverman 
-## STAT4601 Assignment 
+## Victoria Silverman
+##University of Ottawa 
+##This is an assignment please do not copy##
 
 ##set up directory 
 wd2='/Users/Victoria/Documents/Victoria/4th year/STAT4601'
@@ -44,15 +45,14 @@ p<-ggplot(data=df, aes(x=Items, y=Freq)) +
   geom_bar(stat="identity", fill="dark blue")+theme_minimal()
 p
 
-##Heirarchial clustering on items with support>0.05 using jaccaard as 
-#the dissimilarity measure
+##Heirarchial clustering on items with support>0.05 using jaccaard as the dissimilarity measure and ward method for heirarchial clustering
 s <- grocery[,itemFrequency(grocery)>0.05]
 d_jaccard <- dissimilarity(s, which = "items")
 plot(hclust(d_jaccard, method = "ward.D2"), main = "Dendrogram for items")
 
 ## create a correlation plot/matrix
 groc <- as(grocery, "matrix")
-corr<-corSparse(groc, Y = NULL, cov = FALSE)
+corr<-corSparse(groc, Y = NULL, cov = FALSE) ## need qlcMatrix package to run this version of correlation because it is a sparse matrix
 corr[lower.tri(corr,diag=TRUE)] <- NA
 corr[corr == 1] <- NA
 corrdf <- as.data.frame(corr)
@@ -129,14 +129,14 @@ image(grocery, aspect='fill')
 image(subset, aspect='fill')
 
 ##Q2
-## run apriori
+## run apriori - this is the algorithm that generates the association rules
 rules <- apriori(grocery, parameter = list(supp = 0.01, conf = 0.25, target = "rules"))
 
 ##remove redundant rules
 summary(rules)
 rules2 <- rules[!is.redundant(rules)]
 summary(rules2)
-rules=rules2
+rules<-rules2
 
 ##Q3
 ## inspect top 4 rules by lift
@@ -147,7 +147,7 @@ inspect(head(rules, n = 4, by = "lift"))
 
 #graphic 1 is a graph method, in a circle with a subset of the rules
 subrules <- subset(rules, lift>1.5)
-realsmol=head(subrules,n=10, by="support", decreasing=TRUE)
+realsmol<-head(subrules,n=10, by="support", decreasing=TRUE)
 plot(realsmol, method="graph", control=list(layout=igraph::in_circle()))
 
 
