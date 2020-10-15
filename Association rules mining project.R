@@ -156,9 +156,13 @@ subrules2 <- subset(rules, support<0.1 & confidence>0.4)
 plot(subrules2, measure=c("support", "lift"), shading="confidence",control=list(col=sequential_hcl(100)), jitter=0)
 
 #graphic 3 parallel coordinates graph on another subset of the rules
+# the colouring default for parallel coordinate graphs in arulesViz is lift
 confiru <- (subset(rules, confidence>0.3))
 confiru2<- head(subrules,n=35, by="confidence")
 plot(confiru2, method="paracoord", control=list(col=sequential_hcl(100)))
+# you can also run
+plot(confiru2, method="paracoord", shading="lift", control=list(col=sequential_hcl(100)))
+#to confirm that statement, or you could change "lift" to any other arules metric for shading
 
 #graphic 4 grouped graph on another subset of the rules
 reelsmol<-head(subrules,n=50, by="lift", decreasing=TRUE)
